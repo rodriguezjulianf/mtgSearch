@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca MTG</title>
+</head>
+
+<body style="background-color:darkslategray">
+    <input style="width:90%;height:100px;font-size: 70px" id="input" type="text"
+        placeholder="escribí bien el nombre...">
+    <br>
+    <button style="width:20%;height:150px;font-size: 50px;margin-left:40%;margin-top: 10%;" id="submit" type="submit"
+        onclick="abrir()">Buscar</button>
+</body>
+<script>
+    var input = document.getElementById("input");
+    input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("submit").click();
+        }
+    });
+    function abrir() {
+        let cardName = document.getElementById('input').value;
+        if (cardName.split('').length > 1) {
+            cardName = cardName.split(' ').join('+');
+        }
+        const pirulo = `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`;
+        const mercadia = `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`;
+        const magicLair = `https://www.magiclair.com.ar/productos.html?viene=&search=${cardName}`;
+        const batikueva = `https://www.labatikuevastore.com/search/?q=${cardName}`;
+        const scryfall = `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`;
+        window.open(pirulo);
+        window.open(mercadia);
+        window.open(magicLair);
+        window.open(batikueva);
+        window.open(scryfall);
+    }
+</script>
+
+</html>
