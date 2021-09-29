@@ -12,32 +12,51 @@
     <input style="width:90%;height:100px;font-size: 70px" id="input" type="text"
         placeholder="escribí bien el nombre...">
     <br>
-    <button style="width:20%;height:150px;font-size: 50px;margin-left:40%;margin-top: 10%;" id="submit" type="submit"
+    <input style="height:40px;width:40px;" type="checkbox" id="pirulo" name="pirulo">
+    <label style="color:white;font-size:40px" for="pirulo">pirulo</label>
+    <input style="height:40px;width:40px;" type="checkbox" id="mercadia" name="mercadia">
+    <label style="color:white;font-size:40px" for="mercadia">mercadia</label>
+    <input style="height:40px;width:40px;" type="checkbox" id="magicLair" name="magicLair">
+    <label style="color:white;font-size:40px" for="magicLair">magicLair</label>
+    <input style="height:40px;width:40px;" type="checkbox" id="batikueva" name="batikueva">
+    <label style="color:white;font-size:40px" for="batikueva">batikueva</label>
+    <input style="height:40px;width:40px;" type="checkbox" id="scryfall" name="scryfall">
+    <label style="color:white;font-size:40px" for="scryfall">scryfall</label>
+    <br>
+    <button style="width:20%;height:150px;font-size: 50px;margin-left:5%;margin-top: 5%;" id="submit" type="submit"
         onclick="abrir()">Buscar</button>
 </body>
 <script>
-    var input = document.getElementById("input");
+    const input = document.getElementById("input");
     input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("submit").click();
         }
     });
+    const stores = [];
+    document.querySelectorAll("input").forEach((documento) => {
+        if (documento.getAttribute("name")) {
+            stores.push(documento.getAttribute("name"))
+        }
+    })
     function abrir() {
         let cardName = document.getElementById('input').value;
         if (cardName.split('').length > 1) {
             cardName = cardName.split(' ').join('+');
         }
-        const pirulo = `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`;
-        const mercadia = `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`;
-        const magicLair = `https://www.magiclair.com.ar/productos.html?viene=&search=${cardName}`;
-        const batikueva = `https://www.labatikuevastore.com/search/?q=${cardName}`;
-        const scryfall = `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`;
-        window.open(pirulo);
-        window.open(mercadia);
-        window.open(magicLair);
-        window.open(batikueva);
-        window.open(scryfall);
+        const storesURL = {
+            pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
+            mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
+            magicLair: `https://www.magiclair.com.ar/productos.html?viene=&search=${cardName}`,
+            batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
+            scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
+        }
+        stores.forEach((store) => {
+            if (document.querySelector(`[name = ${store}]`).checked) {
+                window.open(storesURL[store]);
+            }
+        })
     }
 </script>
 
