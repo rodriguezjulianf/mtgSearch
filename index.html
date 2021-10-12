@@ -9,8 +9,6 @@
 </head>
 
 <body style="background-color:darkslategray">
-    <p class="p">Escribí la carta en inglés</p>
-    <input class="inputText" id="input" type="text" placeholder="Escribí bien...">
     <br>
     <input class="checkbox" type="checkbox" id="pirulo" name="pirulo" checked>
     <label class="label" for="pirulo">pirulo</label>
@@ -23,9 +21,24 @@
     <input class="checkbox" type="checkbox" id="scryfall" name="scryfall" checked>
     <label class="label" for="scryfall">scryfall</label>
     <br>
+    <p class="p">Escribí la carta en inglés</p>
+    <input class="inputText" id="input" type="text" placeholder="Escribí bien...">
     <button class="button" id="submit" type="submit" onclick="abrir()">Buscar</button>
+    <br>
+    <label class="p" for="deckList">Pegá tu deck (sin secciones como: //Main o //Sideboard)</label>
+    <br>
+    <textarea class="textarea" id="deckList" name="deckList" rows="4" cols="100"></textarea> 
+    <br>
+    <button class="button" id="submit" type="submit" onclick="handleBuscarDeck()">Buscar Deck</button>
+    <p>this is not a serious project</p>
 </body>
 <script>
+    const stores = [];
+    document.querySelectorAll("input").forEach((documento) => {
+        if (documento.getAttribute("name")) {
+            stores.push(documento.getAttribute("name"))
+        }
+    })
     const input = document.getElementById("input");
     input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
@@ -33,14 +46,26 @@
             document.getElementById("submit").click();
         }
     });
-    const stores = [];
-    document.querySelectorAll("input").forEach((documento) => {
-        if (documento.getAttribute("name")) {
-            stores.push(documento.getAttribute("name"))
-        }
-    })
+    function handleBuscarDeck() {
+        const cardListArray = document.getElementById("deckList").value.replace(/(\d+)(.)/g, '').split('\n')
+        cardListArray.forEach((card) => {
+            const cardToQuery = card.replace(/(\s)/g, '+')
+            const storesURL = {
+                pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
+                mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
+                magicLair: `https://www.magiclair.com.ar/productos.html?viene=&search=${cardToQuery}`,
+                batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
+                scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
+            }
+            stores.forEach((store) => {
+                if (document.querySelector(`[name = ${store}]`).checked) {
+                    window.open(storesURL[store]);
+                }
+            })
+        })
+    }
     function abrir() {
-        let cardName = document.getElementById('input').value;
+        let cardName = document.getElementById('input').value.replace(/(\d+)(.)/g, '');
         if (cardName.split('').length > 1) {
             cardName = cardName.split(' ').join('+');
         }
@@ -82,11 +107,15 @@
     }
 
     .button {
-        width: 18%;
-        height: 120px;
-        font-size: 50px;
+        width: 13%;
+        height: 60px;
+        font-size: 30px;
         margin-left: 5%;
         margin-top: 30px;
+    }
+
+    .textarea {
+        height: 250px;
     }
 </style>
 
