@@ -17,9 +17,11 @@
     <input class="checkbox" type="checkbox" id="magicLair" name="magicLair" checked>
     <label class="label" for="magicLair">magicLair</label>
     <input class="checkbox" type="checkbox" id="batikueva" name="batikueva" checked>
-    <label class="label" for="batikueva">batikueva</label>
+    <label class="label" for="batikueva">batikueva</label> 
     <input class="checkbox" type="checkbox" id="scryfall" name="scryfall" checked>
     <label class="label" for="scryfall">scryfall</label>
+    <input class="checkbox" type="checkbox" id="starcitygames" name="starcitygames" checked>
+    <label class="label" for="starcitygames">starcitygames</label>
     <br>
     <p class="p">Escribí la carta en inglés</p>
     <input class="inputText" id="input" type="text" placeholder="Escribí bien...">
@@ -53,9 +55,10 @@
             const storesURL = {
                 pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
                 mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
-                magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A{cardToQuery}%2A`,
+                magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
                 batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
                 scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
+                starcitygames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
             }
             stores.forEach((store) => {
                 if (document.querySelector(`[name = ${store}]`).checked) {
@@ -72,9 +75,10 @@
         const storesURL = {
             pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
             mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
-            magicLair: `https://www.magiclair.com.ar/productos.html?viene=&search=${cardName}`,
+            magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
             batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
             scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
+            starcitygames: `https://starcitygames.com/search/?search_query=${cardName}`,
         }
         stores.forEach((store) => {
             if (document.querySelector(`[name = ${store}]`).checked) {
