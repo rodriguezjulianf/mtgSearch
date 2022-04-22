@@ -1,0 +1,89 @@
+#body-main {
+  background-color: rgba(30, 51, 103, 0.833);
+}
+
+.p {
+  margin: 10px;
+  font-size: 26px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+}
+#pastedeck {
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+h2 {
+  text-decoration: underline;
+  margin: 10px;
+  font-size: 35px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.inputText {
+  font-family: "Gemunu Libre", sans-serif;
+  margin: 10px;
+  width: 60%;
+  height: 40px;
+  font-size: 30px;
+}
+
+.checkbox {
+  margin: 10px;
+  margin-top: 5px;
+  height: 15px;
+  width: 20px;
+}
+
+.label {
+  margin: 3px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgb(240, 240, 240);
+  font-size: 23px;
+}
+
+.button {
+  font-family: "Gemunu Libre", sans-serif;
+  width: 8%;
+  height: 30px;
+  font-size: 15px;
+  margin-left: 1%;
+  margin-top: 5px;
+}
+
+.textarea {
+  font-family: "Gemunu Libre", sans-serif;
+  margin: 20px 10px 10px 10px;
+  height: 230px;
+  width: 55%;
+  font-size: 20px;
+}
+
+#foot {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+}
+#foot-link {
+  font-size: 15px;
+  color: rgb(255, 123, 123);
+}
+
+#link {
+  font-size: 26px;
+  color: rgb(255, 123, 123);
+}
+
+#list {
+  margin: 10px;
+  font-size: 26px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+}
+/* RIP PENGUIN */

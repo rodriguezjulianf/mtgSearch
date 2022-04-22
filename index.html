@@ -1,126 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ephesis&family=Gemunu+Libre:wght@300&family=Roboto:ital,wght@1,700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTG ZUL SEARCH</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca MTG</title>
-</head>
+  <body id="body-main">
+    <h1>Magic Zul Search</h1>
+    <br />
 
-<body style="background-color:darkslategray">
-    <br>
-    <input class="checkbox" type="checkbox" id="pirulo" name="pirulo" checked>
-    <label class="label" for="pirulo">pirulo</label>
-    <input class="checkbox" type="checkbox" id="mercadia" name="mercadia" checked>
-    <label class="label" for="mercadia">mercadia</label>
-    <input class="checkbox" type="checkbox" id="magicLair" name="magicLair" checked>
-    <label class="label" for="magicLair">magicLair</label>
-    <input class="checkbox" type="checkbox" id="batikueva" name="batikueva" checked>
-    <label class="label" for="batikueva">batikueva</label> 
-    <input class="checkbox" type="checkbox" id="scryfall" name="scryfall" checked>
-    <label class="label" for="scryfall">scryfall</label>
-    <input class="checkbox" type="checkbox" id="starcitygames" name="starcitygames" checked>
-    <label class="label" for="starcitygames">starcitygames</label>
-    <br>
-    <p class="p">Escribí la carta en inglés</p>
-    <input class="inputText" id="input" type="text" placeholder="Escribí bien...">
-    <button class="button" id="submit" type="submit" onclick="abrir()">Buscar</button>
-    <br>
-    <label class="p" for="deckList">Pegá tu deck (sin secciones como: //Main o //Sideboard)</label>
-    <br>
-    <textarea class="textarea" id="deckList" name="deckList" rows="4" cols="100"></textarea> 
-    <br>
-    <button class="button" id="submit" type="submit" onclick="handleBuscarDeck()">Buscar Deck</button>
-    <p>this is not a serious project</p>
-</body>
-<script>
+    
+
+
+    <input class="checkbox" type="checkbox" id="pirulo" name="pirulo" checked />
+    <label class="label" for="pirulo">Pirulo</label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="mercadia"
+      name="mercadia"
+      checked
+    />
+    <label class="label" for="mercadia">Mercadia</label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="magicLair"
+      name="magicLair"
+      checked
+    />
+    <label class="label" for="magicLair">MagicLair</label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="batikueva"
+      name="batikueva"
+      checked
+    />
+    <label class="label" for="batikueva">Batikueva</label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="scryfall"
+      name="scryfall"
+      checked
+    />
+    <label class="label" for="scryfall">Scryfall</label>
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="starcitygames"
+      name="starcitygames"
+      checked
+    />
+    <label class="label" for="starcitygames">StarcityGames</label>
+    <br />
+    <hr>
+
+
+    <p class="p"><a id="pastedeck"><strong>CARD BROWSER:</a></strong></p>
+    <input
+      class="inputText"
+      id="input"
+      type="text"
+      placeholder="Ex: 'Akroma's Memorial'"
+    />
+    <button class="button" id="submit" type="submit" onclick="abrir()">
+      Search
+    </button>
+    <br />
+
+    <hr>
+
+    <label class="p" for="deckList">
+    <a id="pastedeck"><strong>PASTE YOUR DECK: </strong></a>(remember to not copy sections like:
+      //Main or //Sideboard)</label
+    >
+    <br />
+    <textarea
+      placeholder="Ex: 
+      4 Springleaf Drum
+      3 Tormod's Crypt
+      4 Welding Jar
+      4 Cranial Plating
+      1 Nettlecyst
+      4 Thought Monitor"
+      class="textarea"
+      id="deckList"
+      name="deckList"
+      rows="4"
+      cols="100"
+    ></textarea>
+    <br />
+    <button
+      class="button"
+      id="submit"
+      type="submit"
+      onclick="handleBuscarDeck()"
+    >
+      Search
+    </button>
+<hr>
+    <h2>FAQ:</h2>
+
+    <ul id="list">
+
+    <li> How this works ? When you search for a card in the boxes up above, respective pages will open up for each box you selected earlier.</li>
+
+    <li>First time here? tabs do not open? Remember to allow popups for this page. </li>
+
+    <li>How many times can i do this? As many times as you want, there is no limit of uses.</li>
+
+    <li>This page is great ! how can i contact the owner? If you want to contact us <a id="link" href="https://github.com/rodriguezjulianf"
+    target="_blank"
+    rel="noopener noreferrer">click here. </a></li>
+
+</ul>
+
+    
+
+    <!-- RIP PENGUIN -->
+
+    
+    </p>
+    <footer>
+        <p id="foot">
+            This is not a serious project.
+
+
+  </body>
+  <script>
     const stores = [];
     document.querySelectorAll("input").forEach((documento) => {
-        if (documento.getAttribute("name")) {
-            stores.push(documento.getAttribute("name"))
-        }
-    })
+      if (documento.getAttribute("name")) {
+        stores.push(documento.getAttribute("name"));
+      }
+    });
     const input = document.getElementById("input");
     input.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            document.getElementById("submit").click();
-        }
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("submit").click();
+      }
     });
     function handleBuscarDeck() {
-        const cardListArray = document.getElementById("deckList").value.replace(/(\d+)(.)/g, '').split('\n')
-        cardListArray.forEach((card) => {
-            const cardToQuery = card.replace(/(\s)/g, '+')
-            const storesURL = {
-                pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
-                mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
-                magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
-                batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
-                scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
-                starcitygames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
-            }
-            stores.forEach((store) => {
-                if (document.querySelector(`[name = ${store}]`).checked) {
-                    window.open(storesURL[store]);
-                }
-            })
-        })
+      const cardListArray = document
+        .getElementById("deckList")
+        .value.replace(/(\d+)(.)/g, "")
+        .split("\n");
+      cardListArray.forEach((card) => {
+        const cardToQuery = card.replace(/(\s)/g, "+");
+        const storesURL = {
+          Pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
+          Mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
+          MagicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
+          Batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
+          Scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
+          StarcityGames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
+        };
+        stores.forEach((store) => {
+          if (document.querySelector(`[name = ${store}]`).checked) {
+            window.open(storesURL[store]);
+          }
+        });
+      });
     }
     function abrir() {
-        let cardName = document.getElementById('input').value.replace(/(\d+)(.)/g, '');
-        if (cardName.split('').length > 1) {
-            cardName = cardName.split(' ').join('+');
+      let cardName = document
+        .getElementById("input")
+        .value.replace(/(\d+)(.)/g, "");
+      if (cardName.split("").length > 1) {
+        cardName = cardName.split(" ").join("+");
+      }
+      const storesURL = {
+        Pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
+        Mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
+        MagicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
+        Batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
+        Scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
+        StarcityGames: `https://starcitygames.com/search/?search_query=${cardName}`,
+      };
+      stores.forEach((store) => {
+        if (document.querySelector(`[name = ${store}]`).checked) {
+          window.open(storesURL[store]);
         }
-        const storesURL = {
-            pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
-            mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
-            magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
-            batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
-            scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
-            starcitygames: `https://starcitygames.com/search/?search_query=${cardName}`,
-        }
-        stores.forEach((store) => {
-            if (document.querySelector(`[name = ${store}]`).checked) {
-                window.open(storesURL[store]);
-            }
-        })
+      });
     }
-</script>
-<style>
-    .p {
-        font-size: 40px;
-        color: white;
-    }
-
-    .inputText {
-        width: 90%;
-        height: 90px;
-        font-size: 70px;
-    }
-
-    .checkbox {
-        margin-top: 30px;
-        height: 35px;
-        width: 35px;
-    }
-
-    .label {
-        color: white;
-        font-size: 40px;
-    }
-
-    .button {
-        width: 13%;
-        height: 60px;
-        font-size: 30px;
-        margin-left: 5%;
-        margin-top: 30px;
-    }
-
-    .textarea {
-        height: 250px;
-    }
-</style>
-
+  </script>
 </html>
