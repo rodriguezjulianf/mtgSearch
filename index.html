@@ -160,12 +160,12 @@
       cardListArray.forEach((card) => {
         const cardToQuery = card.replace(/(\s)/g, "+");
         const storesURL = {
-          Pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
-          Mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
-          MagicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
-          Batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
-          Scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
-          StarcityGames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
+          pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
+          mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
+          magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
+          batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
+          scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
+          starcitygames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
         };
         stores.forEach((store) => {
           if (document.querySelector(`[name = ${store}]`).checked) {
@@ -182,12 +182,12 @@
         cardName = cardName.split(" ").join("+");
       }
       const storesURL = {
-        Pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
-        Mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
-        MagicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
-        Batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
-        Scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
-        StarcityGames: `https://starcitygames.com/search/?search_query=${cardName}`,
+        pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
+        mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
+        magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
+        batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
+        scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
+        starcitygames: `https://starcitygames.com/search/?search_query=${cardName}`,
       };
       stores.forEach((store) => {
         if (document.querySelector(`[name = ${store}]`).checked) {
