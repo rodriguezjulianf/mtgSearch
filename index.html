@@ -4,10 +4,6 @@
     <link href="style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ephesis&family=Gemunu+Libre:wght@300&family=Roboto:ital,wght@1,700&display=swap"
-      rel="stylesheet"
-    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,129 +12,135 @@
 
   <body id="body-main">
     <h1>Magic Zul Search</h1>
-    <br />
 
-    
+    <hr />
 
+    <div class="checkbox-container">
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="pirulo"
+        name="pirulo"
+        checked
+      />
+      <label class="label" for="pirulo">Pirulo</label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="mercadia"
+        name="mercadia"
+        checked
+      />
+      <label class="label" for="mercadia">Mercadia</label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="magicLair"
+        name="magicLair"
+        checked
+      />
+      <label class="label" for="magicLair">MagicLair</label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="batikueva"
+        name="batikueva"
+        checked
+      />
+      <label class="label" for="batikueva">Batikueva</label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="scryfall"
+        name="scryfall"
+        checked
+      />
+      <label class="label" for="scryfall">Scryfall</label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="starcitygames"
+        name="starcitygames"
+        checked
+      />
+      <label class="label" for="starcitygames">StarcityGames</label>
+    </div>
 
-    <input class="checkbox" type="checkbox" id="pirulo" name="pirulo" checked />
-    <label class="label" for="pirulo">Pirulo</label>
-    <input
-      class="checkbox"
-      type="checkbox"
-      id="mercadia"
-      name="mercadia"
-      checked
-    />
-    <label class="label" for="mercadia">Mercadia</label>
-    <input
-      class="checkbox"
-      type="checkbox"
-      id="magicLair"
-      name="magicLair"
-      checked
-    />
-    <label class="label" for="magicLair">MagicLair</label>
-    <input
-      class="checkbox"
-      type="checkbox"
-      id="batikueva"
-      name="batikueva"
-      checked
-    />
-    <label class="label" for="batikueva">Batikueva</label>
-    <input
-      class="checkbox"
-      type="checkbox"
-      id="scryfall"
-      name="scryfall"
-      checked
-    />
-    <label class="label" for="scryfall">Scryfall</label>
-    <input
-      class="checkbox"
-      type="checkbox"
-      id="starcitygames"
-      name="starcitygames"
-      checked
-    />
-    <label class="label" for="starcitygames">StarcityGames</label>
-    <br />
-    <hr>
+    <hr />
+    <div class="input-wrapper">
+      <label class="input-label">CARD BROWSER:</label>
+      <input
+        class="inputText"
+        id="input"
+        type="text"
+        placeholder="Ex: 'Akroma's Memorial'"
+      />
+      <button class="button" id="submit" type="submit" onclick="abrir()">
+        Search
+      </button>
+    </div>
+    <hr />
+    <div class="text-area-wrapper">
+      <label class="input-label" for="deckList"
+        >PASTE YOUR DECK: (remember to not copy sections like: //Main or
+        //Sideboard)</label
+      >
 
+      <textarea
+        placeholder="Ex: 
+        4 Springleaf Drum
+        3 Tormod's Crypt
+        4 Welding Jar
+        4 Cranial Plating
+        1 Nettlecyst
+        4 Thought Monitor"
+        class="textarea"
+        id="deckList"
+        name="deckList"
+        rows="4"
+        cols="100"
+      ></textarea>
 
-    <p class="p"><a id="pastedeck"><strong>CARD BROWSER:</a></strong></p>
-    <input
-      class="inputText"
-      id="input"
-      type="text"
-      placeholder="Ex: 'Akroma's Memorial'"
-    />
-    <button class="button" id="submit" type="submit" onclick="abrir()">
-      Search
-    </button>
-    <br />
+      <button
+        class="button"
+        id="submit"
+        type="submit"
+        onclick="handleBuscarDeck()"
+      >
+        Search
+      </button>
+    </div>
 
-    <hr>
-
-    <label class="p" for="deckList">
-    <a id="pastedeck"><strong>PASTE YOUR DECK: </strong></a>(remember to not copy sections like:
-      //Main or //Sideboard)</label
-    >
-    <br />
-    <textarea
-      placeholder="Ex: 
-      4 Springleaf Drum
-      3 Tormod's Crypt
-      4 Welding Jar
-      4 Cranial Plating
-      1 Nettlecyst
-      4 Thought Monitor"
-      class="textarea"
-      id="deckList"
-      name="deckList"
-      rows="4"
-      cols="100"
-    ></textarea>
-    <br />
-    <button
-      class="button"
-      id="submit"
-      type="submit"
-      onclick="handleBuscarDeck()"
-    >
-      Search
-    </button>
-<hr>
-    <h2>FAQ:</h2>
-
-    <ul id="list">
-
-    <li> How this works ? When you search for a card in the boxes up above, respective pages will open up for each box you selected earlier.</li>
-
-    <li>First time here? tabs do not open? Remember to allow popups for this page. </li>
-
-    <li>How many times can i do this? As many times as you want, there is no limit of uses.</li>
-
-    <li>This page is great ! how can i contact the owner? If you want to contact us <a id="link" href="https://github.com/rodriguezjulianf"
-    target="_blank"
-    rel="noopener noreferrer">click here. </a></li>
-
-</ul>
-
-    
-
-    <!-- RIP PENGUIN -->
-
-    
-    </p>
-    <footer>
-        <p id="foot">
-            This is not a serious project.
-
-
+    <button class="button" onclick="hideFaq()">FAQ:</button>
+    <ul id="list" style="display: none">
+      <li>
+        How this works ? When you search for a card in the boxes up above,
+        respective pages will open up for each box you selected earlier.
+      </li>
+      <li>
+        First time here? tabs do not open? Remember to allow popups for this
+        page.
+      </li>
+      <li>
+        How many times can i do this? As many times as you want, there is no
+        limit of uses.
+      </li>
+      <li>
+        This page is great ! how can i contact the owner? If you want to contact
+        us id="link" href="https://github.com/rodriguezjulianf" target="_blank"
+        rel="noopener noreferrer">click here.
+      </li>
+    </ul>
   </body>
   <script>
+    function hideFaq() {
+      const lista = document.getElementById("list");
+      if (lista.style.display === "none") {
+        lista.style.display = "block";
+      } else {
+        lista.style.display = "none";
+      }
+    }
     const stores = [];
     document.querySelectorAll("input").forEach((documento) => {
       if (documento.getAttribute("name")) {
