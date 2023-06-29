@@ -24,6 +24,7 @@
         checked
       />
       <label class="label" for="pirulo">Pirulo</label>
+
       <input
         class="checkbox"
         type="checkbox"
@@ -32,6 +33,7 @@
         checked
       />
       <label class="label" for="mercadia">Mercadia</label>
+
       <input
         class="checkbox"
         type="checkbox"
@@ -40,6 +42,7 @@
         checked
       />
       <label class="label" for="magicLair">MagicLair</label>
+
       <input
         class="checkbox"
         type="checkbox"
@@ -48,6 +51,16 @@
         checked
       />
       <label class="label" for="batikueva">Batikueva</label>
+
+      <input
+        class="checkbox"
+        type="checkbox"
+        id="magicdealers"
+        name="magicdealers"
+        checked
+      />
+      <label class="label" for="magicdealers">MagicDealers</label>
+
       <input
         class="checkbox"
         type="checkbox"
@@ -56,6 +69,7 @@
         checked
       />
       <label class="label" for="scryfall">Scryfall</label>
+
       <input
         class="checkbox"
         type="checkbox"
@@ -166,6 +180,7 @@
           mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
           magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
           batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
+          magicdealers: `https://www.magicdealersstore.com/products/search?q=${cardToQuery}&c=1`,
           scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
           starcitygames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
         };
@@ -188,6 +203,7 @@
         mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
         magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
         batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
+        magicdealers: `https://www.magicdealersstore.com/products/search?q=${cardName}&c=1`,
         scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
         starcitygames: `https://starcitygames.com/search/?search_query=${cardName}`,
       };
