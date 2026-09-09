@@ -176,7 +176,7 @@
       cardListArray.forEach((card) => {
         const cardToQuery = card.replace(/(\s)/g, "+");
         const storesURL = {
-          pirulo: `https://www.mtgpirulo.com/products/search?q=${cardToQuery}&c=1`,
+          pirulo: `https://mtgpirulo.com/search.php?search_query=${cardName}`,,
           mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
           magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
           batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
@@ -199,7 +199,7 @@
         cardName = cardName.split(" ").join("+");
       }
       const storesURL = {
-        pirulo: `https://www.mtgpirulo.com/products/search?q=${cardName}&c=1`,
+        pirulo: `https://mtgpirulo.com/search.php?search_query=${cardName}`,
         mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
         magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
         batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
