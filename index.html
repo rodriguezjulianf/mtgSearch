@@ -16,67 +16,28 @@
     <hr />
 
     <div class="checkbox-container">
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="pirulo"
-        name="pirulo"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="pirulo" name="pirulo" checked />
       <label class="label" for="pirulo">Pirulo</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="mercadia"
-        name="mercadia"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="mercadia" name="mercadia" checked />
       <label class="label" for="mercadia">Mercadia</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="magicLair"
-        name="magicLair"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="magicLair" name="magicLair" checked />
       <label class="label" for="magicLair">MagicLair</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="batikueva"
-        name="batikueva"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="batikueva" name="batikueva" checked />
       <label class="label" for="batikueva">Batikueva</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="magicdealers"
-        name="magicdealers"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="magicdealers" name="magicdealers" checked />
       <label class="label" for="magicdealers">MagicDealers</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="scryfall"
-        name="scryfall"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="laworkshop" name="laworkshop" checked />
+      <label class="label" for="laworkshop">La Workshop TCG</label>
+
+      <input class="checkbox" type="checkbox" id="scryfall" name="scryfall" checked />
       <label class="label" for="scryfall">Scryfall</label>
 
-      <input
-        class="checkbox"
-        type="checkbox"
-        id="starcitygames"
-        name="starcitygames"
-        checked
-      />
+      <input class="checkbox" type="checkbox" id="starcitygames" name="starcitygames" checked />
       <label class="label" for="starcitygames">StarcityGames</label>
     </div>
 
@@ -110,14 +71,13 @@
         4 Thought Monitor"
         class="textarea"
         id="deckList"
-        name="deckList"
         rows="4"
         cols="100"
       ></textarea>
 
       <button
         class="button"
-        id="submit"
+        id="submitDeck"
         type="submit"
         onclick="handleBuscarDeck()"
       >
@@ -125,10 +85,12 @@
       </button>
     </div>
 
+    <p id="status" class="status" aria-live="polite"></p>
+
     <button class="button" onclick="hideFaq()">FAQ:</button>
     <ul id="list" style="display: none">
       <li>
-        How this works ? When you search for a card in the boxes up above,
+        How this works? When you search for a card in the boxes up above,
         respective pages will open up for each box you selected earlier.
       </li>
       <li>
@@ -140,78 +102,171 @@
         limit of uses.
       </li>
       <li>
-        This page is great ! how can i contact the owner? If you want to contact
-        us id="link" href="https://github.com/rodriguezjulianf" target="_blank"
-        rel="noopener noreferrer">click here.
+        This page is great! how can i contact the owner? If you want to
+        contact us,
+        <a
+          id="link"
+          href="https://github.com/rodriguezjulianf"
+          target="_blank"
+          rel="noopener noreferrer"
+          >click here</a
+        >.
       </li>
     </ul>
   </body>
   <script>
-    function hideFaq() {
-      const lista = document.getElementById("list");
-      if (lista.style.display === "none") {
-        lista.style.display = "block";
-      } else {
-        lista.style.display = "none";
+    const CHECKBOX_STORAGE_KEY = "mtgZulSearch.selectedStores";
+    const MAX_CARDS_WITHOUT_CONFIRM = 8;
+
+    const storeUrlBuilders = {
+      pirulo: (q) => `https://mtgpirulo.com/search.php?search_query=${q}`,
+      mercadia: (q) =>
+        `https://mercadiacity.com/index.php/catalogsearch/result/?q=${q}`,
+      magicLair: (q) =>
+        `https://magic-lair.myshopify.com/search?page=1&q=%2A${q}%2A`,
+      batikueva: (q) => `https://www.labatikuevastore.com/search/?q=${q}`,
+      magicdealers: (q) =>
+        `https://www.magicdealersstore.com/products/search?q=${q}&c=1`,
+      laworkshop: (q) => `https://laworkshoptcg.com/search?q=${q}`,
+      scryfall: (q) =>
+        `https://scryfall.com/search?q=${q}&unique=cards&as=grid&order=name`,
+      starcitygames: (q) => `https://starcitygames.com/search/?search_query=${q}`,
+    };
+
+    const checkboxes = Array.from(document.querySelectorAll(".checkbox"));
+    const statusEl = document.getElementById("status");
+    const input = document.getElementById("input");
+
+    // Restore previously selected stores, if any were saved.
+    (function restoreCheckboxState() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem(CHECKBOX_STORAGE_KEY) || "null"
+        );
+        if (saved) {
+          checkboxes.forEach((cb) => {
+            if (Object.prototype.hasOwnProperty.call(saved, cb.name)) {
+              cb.checked = saved[cb.name];
+            }
+          });
+        }
+      } catch (e) {
+        // Ignore corrupted storage, just keep defaults.
+      }
+    })();
+
+    function saveCheckboxState() {
+      const state = {};
+      checkboxes.forEach((cb) => {
+        state[cb.name] = cb.checked;
+      });
+      try {
+        localStorage.setItem(CHECKBOX_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Storage might be unavailable (e.g. private mode) - fail silently.
       }
     }
-    const stores = [];
-    document.querySelectorAll("input").forEach((documento) => {
-      if (documento.getAttribute("name")) {
-        stores.push(documento.getAttribute("name"));
-      }
-    });
-    const input = document.getElementById("input");
+    checkboxes.forEach((cb) => cb.addEventListener("change", saveCheckboxState));
+
+    function getActiveStores() {
+      return checkboxes.filter((cb) => cb.checked).map((cb) => cb.name);
+    }
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function hideFaq() {
+      const lista = document.getElementById("list");
+      lista.style.display = lista.style.display === "none" ? "block" : "none";
+    }
+
     input.addEventListener("keyup", function (event) {
-      if (event.keyCode === 13) {
+      if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("submit").click();
       }
     });
-    function handleBuscarDeck() {
-      const cardListArray = document
-        .getElementById("deckList")
-        .value.replace(/(\d+)(.)/g, "")
-        .split("\n");
-      cardListArray.forEach((card) => {
-        const cardToQuery = card.replace(/(\s)/g, "+");
-        const storesURL = {
-          pirulo: `https://mtgpirulo.com/search.php?search_query=${cardName}`,
-          mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardToQuery}`,
-          magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardToQuery}%2A`,
-          batikueva: `https://www.labatikuevastore.com/search/?q=${cardToQuery}`,
-          magicdealers: `https://www.magicdealersstore.com/products/search?q=${cardToQuery}&c=1`,
-          scryfall: `https://scryfall.com/search?q=${cardToQuery}&unique=cards&as=grid&order=name`,
-          starcitygames: `https://starcitygames.com/search/?search_query=${cardToQuery}`,
-        };
-        stores.forEach((store) => {
-          if (document.querySelector(`[name = ${store}]`).checked) {
-            window.open(storesURL[store]);
-          }
-        });
+
+    // Opens one tab per active store for a single card name.
+    // Returns true if at least one popup made it through.
+    function buscarCarta(cardName, activeStores) {
+      const cleanName = cardName.trim();
+      if (!cleanName) return true;
+      const query = encodeURIComponent(cleanName);
+      let anyBlocked = false;
+      activeStores.forEach((store) => {
+        const buildUrl = storeUrlBuilders[store];
+        if (!buildUrl) return;
+        const win = window.open(buildUrl(query), "_blank");
+        if (!win) anyBlocked = true;
       });
+      return !anyBlocked;
     }
+
     function abrir() {
-      let cardName = document
-        .getElementById("input")
-        .value.replace(/(\d+)(.)/g, "");
-      if (cardName.split("").length > 1) {
-        cardName = cardName.split(" ").join("+");
+      const activeStores = getActiveStores();
+      if (activeStores.length === 0) {
+        setStatus("Selecciona al menos una tienda.");
+        return;
       }
-      const storesURL = {
-        pirulo: `https://mtgpirulo.com/search.php?search_query=${cardName}`,
-        mercadia: `https://mercadiacity.com/index.php/catalogsearch/result/?q=${cardName}`,
-        magicLair: `https://magic-lair.myshopify.com/search?page=1&q=%2A${cardName}%2A`,
-        batikueva: `https://www.labatikuevastore.com/search/?q=${cardName}`,
-        magicdealers: `https://www.magicdealersstore.com/products/search?q=${cardName}&c=1`,
-        scryfall: `https://scryfall.com/search?q=${cardName}&unique=cards&as=grid&order=name`,
-        starcitygames: `https://starcitygames.com/search/?search_query=${cardName}`,
-      };
-      stores.forEach((store) => {
-        if (document.querySelector(`[name = ${store}]`).checked) {
-          window.open(storesURL[store]);
+      const cardName = input.value;
+      if (!cardName.trim()) {
+        setStatus("Escribí el nombre de una carta.");
+        return;
+      }
+      const ok = buscarCarta(cardName, activeStores);
+      setStatus(
+        ok
+          ? ""
+          : "Tu navegador bloqueó alguna pestaña. Permití los popups para este sitio e intentá de nuevo."
+      );
+    }
+
+    function parseDeckList(raw) {
+      return raw
+        .split("\n")
+        .map((line) => line.trim().replace(/^\d+\s*x?\s*/i, ""))
+        .filter((line) => line.length > 0);
+    }
+
+    function handleBuscarDeck() {
+      const activeStores = getActiveStores();
+      if (activeStores.length === 0) {
+        setStatus("Selecciona al menos una tienda.");
+        return;
+      }
+      const cardListArray = parseDeckList(
+        document.getElementById("deckList").value
+      );
+      if (cardListArray.length === 0) {
+        setStatus("Pegá una lista de cartas primero.");
+        return;
+      }
+
+      const totalTabs = cardListArray.length * activeStores.length;
+      if (totalTabs > MAX_CARDS_WITHOUT_CONFIRM) {
+        const confirmed = confirm(
+          `Esto va a abrir ${totalTabs} pestañas (${cardListArray.length} cartas x ${activeStores.length} tiendas). ¿Continuar?`
+        );
+        if (!confirmed) {
+          setStatus("Búsqueda cancelada.");
+          return;
         }
+      }
+
+      setStatus(`Buscando ${cardListArray.length} cartas...`);
+      let anyBlocked = false;
+      cardListArray.forEach((card) => {
+        const ok = buscarCarta(card, activeStores);
+        if (!ok) anyBlocked = true;
       });
+
+      setStatus(
+        anyBlocked
+          ? "Tu navegador bloqueó algunas pestañas. Permití los popups para este sitio e intentá de nuevo."
+          : `Listo, se abrieron las búsquedas de ${cardListArray.length} cartas.`
+      );
     }
   </script>
 </html>
